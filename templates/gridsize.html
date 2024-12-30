@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Grid Size</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+        <style>
+            @font-face {
+                font-family: 'NK123Regular';
+                src: url('/static/fonts/NK123-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'NK123Regular';
+                src: url('/static/fonts/NK123-Bold.ttf') format('truetype');
+                font-weight: bold;
+                font-style: normal;
+            }
+            html, body {
+                height: 100%;
+                margin: 0;
+                background: linear-gradient(to bottom, #ADD8E6, #f9f9f9, #ADD8E6);
+                font-family: 'NK123Regular', Arial, sans-serif;
+            }
+            .navbar {
+                height: 70px; /* Navbar height */
+                padding: 0; /* Remove extra padding */
+            }
+
+            .navbar-brand {
+                display: flex;
+                align-items: center;
+            }
+
+            .logo-img {
+                height: 100px; /* Bigger logo */
+                max-width: none; /* Prevent unwanted scaling */
+                margin-right: 8px;
+                margin-top: -15px; /* Pull logo upward */
+                margin-bottom: -15px; /* Prevent navbar from expanding */
+            }
+
+            /* Media Queries for Responsiveness */
+            @media (max-width: 768px) { /* Tablet screens */
+                .logo-img {
+                    height: 80px; /* Adjust size */
+                    margin-top: -10px;
+                    margin-bottom: -10px;
+                }
+            }
+
+            @media (max-width: 576px) { /* Mobile screens */
+                .logo-img {
+                    height: 60px; /* Smaller logo for mobile */
+                    margin-top: -5px;
+                    margin-bottom: -5px;
+                }
+
+                .navbar-brand span {
+                    font-size: 0.9rem; /* Adjust text size for smaller screens */
+                }
+            }
+            h1 {
+                margin-top: 30px;
+                text-align: center;
+                font-size: 2.5rem;
+                font-family: 'NK123Regular';
+                font-weight: bold;
+            }
+            h2 {
+                margin-top: 30px;
+                text-align: center;
+                font-size: 2.5rem;
+                font-family: 'NK123Regular';
+            }
+            .example-grid {
+                text-align: center;
+                margin-top: 20px;
+            }
+            .example-grid img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                margin-bottom: 10px;
+                box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+            }
+            .example-grid p {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+            .example-grid img {
+                max-width: 150px; /* Limits maximum width for small screens */
+                height: auto; /* Maintains aspect ratio */
+            }
+            @media (min-width: 768px) {
+                .example-grid img {
+                    max-width: 200px; /* Slightly larger on tablets and above */
+                }
+            }
+            @media (min-width: 1200px) {
+                .example-grid img {
+                    max-width: 300px; /* Larger size for large screens */
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="/static/images/ppgree.png" alt="GridPix Logo" class="logo-img">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="btn btn-outline-primary" href="/gallery">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-primary ms-2" href="/">
+                                <i class="bi bi-house-fill"></i> Home
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Section -->
+        <div class="container text-center mt-5">
+            <!-- Title -->
+            <h1>Select Your Grid Size</h1>
+
+            <!-- Form for grid size -->
+            <form id="gridForm" action="{{ url_for('grid') }}" method="GET" class="d-flex justify-content-center my-4">
+                <input type="number" min="5" max="30" id="gridSize" name="gridSize" placeholder="Enter grid size (Eg. 5)" class="form-control me-3" style="width: 200px;">
+                <button type="submit" class="btn btn-primary">Create Grid</button>
+            </form>
+
+            <!-- Examples Section -->
+            <div class="example-grid">
+                <h2>Example Grid Sizes</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="/static/images/grid_20241228164821.png" alt="Example Grid 1" class="img-fluid">
+                        <p>5x5 Grid</p>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="/static/images/grid_20241228164830.png" alt="Example Grid 2" class="img-fluid">
+                        <p>15x15 Grid</p>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="/static/images/grid_20241229182212.png" alt="Example Grid 3" class="img-fluid">
+                        <p>30x30 Grid</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById('gridForm').addEventListener('submit', function(event) {
+                const gridSize = document.getElementById('gridSize').value;
+                if (gridSize < 5 || gridSize > 30 || isNaN(gridSize)) {
+                    event.preventDefault();  // Prevent form submission
+                    alert("Please enter a valid grid size between 5 and 30.");
+                }
+            });
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

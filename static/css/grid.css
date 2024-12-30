@@ -1,0 +1,65 @@
+body {
+    background: white;
+}
+
+#gridSize {
+    width: 200px; /* Adjust width */
+    height: 50px; /* Adjust height */
+    font-size: 16px; /* Increase font size */
+}
+
+#sizebutton {
+    width: 150px; /* Adjust width */
+    height: 50px; /* Adjust height */
+    font-size: 16px; /* Increase font size */
+}
+
+#grid {
+    display: grid;
+    justify-content: center; /* Centers the grid horizontally */
+    align-items: center; /* Centers the grid vertically */
+    margin-top: 8%;
+}
+.pixel {
+    border: 1px solid #ccc;
+}
+#colorPalette {
+    display: flex;
+    flex-direction: column; /* Makes the colors stack vertically */
+    flex-wrap: wrap;
+    gap: 10px; /* Adds spacing between the colors */
+    position: fixed; /* Fixes the palette on the left-hand side */
+    left: 10px; /* Positions it 10px from the left edge of the screen */
+    top: 50%; /* Positions it vertically at the center */
+    transform: translateY(-50%); /* Adjusts to center it vertically */
+    padding: 10px; /* Optional: Adds padding around the palette */
+    background-color: #f4f4f4; /* Optional: Background color for better contrast */
+    border-radius: 10px; /* Optional: Adds rounded edges */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+}
+
+.colour {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid #000;
+}
+
+.colour:hover {
+    transform: scale(1.1);
+    border: 2px solid #fff;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem; /* Smaller font size on smaller screens */
+    }
+}
+
+/*.color {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    cursor: pointer;
+}
