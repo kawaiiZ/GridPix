@@ -29,7 +29,7 @@ db.execute('''CREATE TABLE IF NOT EXISTS images (
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('index.html')
 
 
 @app.route('/log_sign', methods=['GET', 'POST'])
